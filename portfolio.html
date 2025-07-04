@@ -1,0 +1,1225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daniel Raj C - Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-red: #dc2626;
+            --dark-red: #991b1b;
+            --light-red: #ef4444;
+            --black: #000000;
+            --dark-gray: #1a1a1a;
+            --medium-gray: #2d2d2d;
+            --light-gray: #404040;
+            --white: #ffffff;
+            --terminal-green: #00ff00;
+            --light-white: #ececec;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, var(--black) 0%, var(--dark-gray) 100%);
+            color: var(--white);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 2px solid var(--primary-red);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-red);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--white);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-red);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--primary-red);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: radial-gradient(circle at center, var(--dark-red) 0%, var(--black) 70%);
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="%23dc2626" stroke-width="0.5" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .profile-section {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .profile-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 4px solid var(--primary-red);
+            background: linear-gradient(135deg, var(--primary-red), var(--dark-red));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: var(--white);
+            font-weight: bold;
+            box-shadow: 0 0 30px rgba(220, 38, 38, 0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .profile-image:hover {
+            transform: scale(1.05);
+        }
+
+        .profile-text {
+            text-align: left;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, var(--primary-red), var(--light-red));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero .subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            color: var(--light-white);
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: var(--primary-red);
+            color: var(--white);
+        }
+
+        .btn-primary:hover {
+            background: var(--dark-red);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--primary-red);
+            border: 2px solid var(--primary-red);
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary-red);
+            color: var(--white);
+        }
+
+        /* Sections */
+        .section {
+            padding: 80px 0;
+            position: relative;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--primary-red);
+        }
+
+        /* About Section */
+        .about {
+            background: var(--dark-gray);
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .about-text {
+            text-align: justify;
+        }
+
+        .about-text p {
+            margin-bottom: 1rem;
+            color: var(--light-white);
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 1.5rem;
+            background: var(--medium-gray);
+            border-radius: 10px;
+            border: 1px solid var(--primary-red);
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary-red);
+        }
+
+        /* Education Section */
+        .education {
+            background: var(--black);
+        }
+
+        .education-timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .timeline-item {
+            background: var(--medium-gray);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border-radius: 10px;
+            border-left: 4px solid var(--primary-red);
+            position: relative;
+        }
+
+        .timeline-date {
+            color: var(--primary-red);
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-title {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: var(--white);
+        }
+
+        .timeline-subtitle {
+            color: var(--light-white);
+            margin-bottom: 1rem;
+        }
+
+        /* Skills Section */
+        .skills {
+            background: var(--dark-gray);
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-category {
+            background: var(--medium-gray);
+            padding: 2rem;
+            border-radius: 10px;
+            border-left: 4px solid var(--primary-red);
+        }
+
+        .skill-category h3 {
+            margin-bottom: 1rem;
+            color: var(--primary-red);
+        }
+
+        .skill-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .skill-bar {
+            width: 100px;
+            height: 6px;
+            background: var(--light-gray);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .skill-progress {
+            height: 100%;
+            background: var(--primary-red);
+            border-radius: 3px;
+            transition: width 2s ease;
+        }
+
+        /* Experience Section */
+        .experience {
+            background: var(--black);
+        }
+
+        .experience-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .experience-card {
+            background: var(--medium-gray);
+            padding: 2rem;
+            border-radius: 10px;
+            border-left: 4px solid var(--primary-red);
+            transition: transform 0.3s ease;
+        }
+
+        .experience-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .experience-header {
+            margin-bottom: 1rem;
+        }
+
+        .experience-title {
+            color: var(--primary-red);
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .experience-company {
+            color: var(--white);
+            margin-bottom: 0.5rem;
+        }
+
+        .experience-date {
+            color: var(--light-white);
+            font-size: 0.9rem;
+        }
+
+        /* Projects Section */
+        .projects {
+            background: var(--dark-gray);
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: var(--medium-gray);
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+            border: 1px solid transparent;
+            position: relative;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary-red);
+        }
+
+        .project-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, var(--dark-red), var(--primary-red));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: var(--white);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 1;
+        }
+
+        .project-icon {
+            position: relative;
+            z-index: 2;
+        }
+
+        .project-content {
+            padding: 2rem;
+        }
+
+        .project-title {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--primary-red);
+        }
+
+        .project-description {
+            color: var(--light-white);
+            margin-bottom: 1rem;
+        }
+
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .tech-tag {
+            background: var(--primary-red);
+            color: var(--white);
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+        }
+
+        /* Certifications Section */
+        .certifications {
+            background: var(--black);
+        }
+
+        .cert-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .cert-item {
+            background: var(--medium-gray);
+            padding: 1.5rem;
+            border-radius: 10px;
+            border-left: 4px solid var(--primary-red);
+            transition: transform 0.3s ease;
+        }
+
+        .cert-item:hover {
+            transform: translateY(-3px);
+        }
+
+        .cert-title {
+            color: var(--primary-red);
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .cert-org {
+            color: var(--white);
+            margin-bottom: 0.5rem;
+        }
+
+        .cert-date {
+            color: var(--light-white);
+            font-size: 0.9rem;
+        }
+
+        /* Contact Section */
+        .contact {
+            background: var(--dark-gray);
+        }
+
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: start;
+        }
+
+        .contact-info {
+            background: var(--medium-gray);
+            padding: 2rem;
+            border-radius: 10px;
+            border-left: 4px solid var(--primary-red);
+        }
+
+        .contact-info h3 {
+            color: var(--primary-red);
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-item svg {
+            width: 24px;
+            height: 24px;
+            fill: var(--primary-red);
+            margin-right: 1rem;
+            flex-shrink: 0;
+        }
+
+        .contact-item a {
+            color: var(--light-white);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .contact-item a:hover {
+            color: var(--primary-red);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--black);
+            text-align: center;
+            padding: 2rem 0;
+            border-top: 2px solid var(--primary-red);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .profile-section {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .profile-text {
+                text-align: center;
+            }
+
+            .about-content,
+            .contact-content {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .profile-image {
+                width: 120px;
+                height: 120px;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in-up {
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        /* Smooth Scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <div class="logo">Daniel Raj C</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#education">Education</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#certifications">Certifications</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <div class="profile-section">
+                <div class="profile-image">
+                    <img src="DP.jpg" alt="Daniel Raj C" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;">
+                </div>
+                <div class="profile-text">
+                    <h1>Daniel Raj C</h1>
+                    <p class="subtitle">Electronics & Communication Engineer | IoT Specialist | Embedded Systems Developer</p>
+                </div>
+            </div>
+            <div class="cta-buttons">
+                <a href="#projects" class="btn btn-primary">View My Work</a>
+                <a href="#contact" class="btn btn-secondary">Get In Touch</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="section about">
+        <div class="container">
+            <h2 class="section-title">About Me</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>dedicated Electronics and Communication Engineering graduate with a strong passion for IoT, embedded systems, and real-time data-driven technologies. I thrive at the intersection of hardware and software, where I can bring innovative ideas to life through hands-on development and system integration.</p>
+                    <p>My journey so far has been shaped by practical learning, diverse projects, and industry exposure across various domains, helping me build a solid foundation in embedded programming, sensor interfacing, wireless communication, and system-level thinking. I actively explore problem-solving through both individual innovation and collaborative teamwork, always staying curious and adaptable.</p>
+                    <p>With a learning mindset and a drive to contribute meaningfully, I’m focused on building scalable tech solutions, refining my skills through research and real-world experience, and growing into a dynamic role that challenges and inspires me.</p>
+                    <div class="stats">
+                        <div class="stat-item">
+                            <div class="stat-number">8.12</div>
+                            <div>CGPA</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">7328</div>
+                            <div>GATE Rank</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">6+</div>
+                            <div>Projects</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">6+</div>
+                            <div>Internships</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="education" class="section education">
+        <div class="container">
+            <h2 class="section-title">Education</h2>
+            <div class="education-timeline">
+                <div class="timeline-item">
+                    <div class="timeline-date">June 2021 - April 2025</div>
+                    <div class="timeline-title">BE - Electronics and Communication Engineering</div>
+                    <div class="timeline-subtitle">Vel Tech Multi Tech Dr. Rangarajan Dr. Sakunthala Engineering College, Chennai</div>
+                    <p><strong>CGPA:</strong> 8.12/10</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">June 2020 - March 2021</div>
+                    <div class="timeline-title">12th Graduation</div>
+                    <div class="timeline-subtitle">Vijayantha Model Higher Secondary School, Chennai</div>
+                    <p><strong>Percentage:</strong> 93%</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">June 2018 - March 2019</div>
+                    <div class="timeline-title">10th Graduation</div>
+                    <div class="timeline-subtitle">St. Joseph's Matriculation School, Chennai</div>
+                    <p><strong>Percentage:</strong> 92%</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills" class="section skills">
+        <div class="container">
+            <h2 class="section-title">Skills & Expertise</h2>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h3>Programming Languages</h3>
+                    <div class="skill-item">
+                        <span>Python</span>
+                        <div class="skill-bar"><div class="skill-progress" style="width: 85%"></div></div>
+                    </div>
+                    <div class="skill-item">
+                        <span>C</span>
+                        <div class="skill-bar"><div class="skill-progress" style="width: 80%"></div></div>
+                    </div>
+                    <div class="skill-item">
+                        <span>Embedded C</span>
+                        <div class="skill-bar"><div class="skill-progress" style="width: 75%"></div></div>
+                    </div>
+                    <div class="skill-item">
+                        <span>SQL</span>
+                        <div class="skill-bar"><div class="skill-progress" style="width: 70%"></div></div>
+                    </div>
+                    <div class="skill-item">
+                        <span>HTML</span>
+                        <div class="skill-bar"><div class="skill-progress" style="width: 50%"></div></div>
+                    </div>
+                    <div class="skill-item">
+                        <span>CSS</span>
+                        <div class="skill-bar"><div class="skill-progress" style="width: 25%"></div></div>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3>Tools & Technologies</h3>
+                    <div class="skill-item">
+                        <span>Arduino IDE</span>
+                        <div class="skill-bar"><div class="skill-progress" style="width: 80%"></div></div>
+                    </div>
+                    <div class="skill-item">
+                        <span>MATLAB</span>
+                        <div class="skill-bar"><div class="skill-progress" style="width: 85%"></div></div>
+                    </div>
+                    <div class="skill-item">
+                        <span>Raspberry Pi</span>
+                        <div class="skill-bar"><div class="skill-progress" style="width: 75%"></div></div>
+                    </div>
+                    <div class="skill-item">
+                        <span>STM32 Firmware</span>
+                        <div class="skill-bar"><div class="skill-progress" style="width: 80%"></div></div>
+                    </div>
+                    <div class="skill-item">
+                        <span>IoT Systems</span>
+                        <div class="skill-bar"><div class="skill-progress" style="width: 80%"></div></div>
+                    </div>
+                    <div class="skill-item">
+                        <span>Web Development</span>
+                        <div class="skill-bar"><div class="skill-progress" style="width: 50%"></div></div>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3>Soft Skills</h3>
+                    <div class="skill-item">
+                        <span>Team Work</span>
+                        <div class="skill-bar"><div class="skill-progress" style="width: 90%"></div></div>
+                    </div>
+                    <div class="skill-item">
+                        <span>Leadership</span>
+                        <div class="skill-bar"><div class="skill-progress" style="width: 85%"></div></div>
+                    </div>
+                    <div class="skill-item">
+                        <span>Adaptability</span>
+                        <div class="skill-bar"><div class="skill-progress" style="width: 90%"></div></div>
+                    </div>
+                    <div class="skill-item">
+                        <span>Creativity</span>
+                        <div class="skill-bar"><div class="skill-progress" style="width: 85%"></div></div>
+                    </div>
+                    <div class="skill-item">
+                        <span>Attention to Details</span>
+                        <div class="skill-bar"><div class="skill-progress" style="width: 90%"></div></div>
+                    </div>
+                    <div class="skill-item">
+                        <span>Critical Thinking</span>
+                        <div class="skill-bar"><div class="skill-progress" style="width: 80%"></div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="experience" class="section experience">
+        <div class="container">
+            <h2 class="section-title">Experience & Internships</h2>
+            <div class="experience-grid">
+                <div class="experience-card">
+                    <div class="experience-header">
+                        <div class="experience-title">Project Intern</div>
+                        <div class="experience-company">Tata Consultancy Services</div>
+                        <div class="experience-date">March 5, 2025 - Present</div>
+                    </div>
+                    <p>Currently working on advanced technology projects, gaining hands-on experience in enterprise-level software development and system integration.</p>
+                </div>
+                <div class="experience-card">
+                    <div class="experience-header">
+                        <div class="experience-title">Project Intern</div>
+                        <div class="experience-company">NEEVEE Technologies</div>
+                        <div class="experience-date">August 15, 2024 - April 28, 2025</div>
+                    </div>
+                    <p>Worked on IoT and embedded systems projects, developing real-world solutions for industrial applications and gaining practical experience in hardware-software integration.</p>
+                </div>
+                <div class="experience-card">
+                    <div class="experience-header">
+                        <div class="experience-title">Student Intern (Embedded System Programming)</div>
+                        <div class="experience-company">Pantech e-learning</div>
+                        <div class="experience-date">April 26, 2023 - May 26, 2023</div>
+                    </div>
+                    <p>Developed proficiency in embedded system programming, working with microcontrollers and real-time systems.</p>
+                </div>
+                <div class="experience-card">
+                    <div class="experience-header">
+                        <div class="experience-title">Student Intern (Raspberry Pi Programming)</div>
+                        <div class="experience-company">Pantech e-learning</div>
+                        <div class="experience-date">February 14, 2024 - March 15, 2024</div>
+                    </div>
+                    <p>Specialized in Raspberry Pi programming and Linux-based embedded systems development.</p>
+                </div>
+                <div class="experience-card">
+                    <div class="experience-header">
+                        <div class="experience-title">Student Intern (Warranty Dept)</div>
+                        <div class="experience-company">Alstom Transport India Limited</div>
+                        <div class="experience-date">June 05, 2023 - June 25, 2023</div>
+                    </div>
+                    <p>Gained exposure to transportation industry standards and warranty management processes in a leading global transportation company.</p>
+                </div>
+                <div class="experience-card">
+                    <div class="experience-header">
+                        <div class="experience-title">Student Intern (Embedded Programming)</div>
+                        <div class="experience-company">Pantech e-learning</div>
+                        <div class="experience-date">February 15, 2023 - March 15, 2023 </div>
+                    </div>
+                    <p>Specialized in ESP32 programming, sensor interfacing and wireless communication.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="section projects">
+        <div class="container">
+            <h2 class="section-title">Featured Projects</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="LoRaTrackerProject.jpeg" alt="Project Name" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">LoRa-Based Asset Tracking with Geo-Fencing</h3>
+                        <p class="project-description">Developing a custom SMD board for real-time asset tracking and geo-fencing using LoRa-E5, Quectel L89 GNSS, and accelerometer. Features power efficiency optimization, anomaly detection algorithms, and integration with Things Network Stack and Firebase.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">LoRa-E5</span>
+                            <span class="tech-tag">GNSS</span>
+                            <span class="tech-tag">Firebase</span>
+                            <span class="tech-tag">IoT</span>
+                            <span class="tech-tag">Real-time Tracking</span>
+                            <span class="tech-tag">Things Network Stack</span>
+                            <span class="tech-tag">Custom SMD Board</span>
+                            <span class="tech-tag">Anomaly Detection</span>
+                        </div>
+                        <p><strong>Duration:</strong> August 15, 2024 - April 28, 2025</p>
+                        <p><strong>Status:</strong> Completed</p>
+                        <div style="margin-top: 1rem;">
+                            <a href="https://github.com/DanielRajChristeen/LoRa-Asset-Tracker" target="_blank" class="btn btn-primary" style="font-size: 0.9rem; padding: 8px 20px;">Read More</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="StudentHub.png" alt="Project Name" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">StudentHub</h3>
+                        <p class="project-description">StudentHub is a comprehensive student management system designed to streamline administrative tasks and enhance academic processes. This project is aimed at educational institutions, administrators, and developers looking for a robust, modular, and scalable platform to manage student information, assignments, attendance, and more.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">HTML</span>
+                            <span class="tech-tag">CSS</span>
+                            <span class="tech-tag">JavaScript</span>
+                            <span class="tech-tag">Web Development</span>
+                            <span class="tech-tag">Flask Server</span>  
+                            <span class="tech-tag">SQLite</span>  
+                            <span class="tech-tag">DBMS</span>
+                        </div>
+                        <p><strong>Date:</strong> October 10, 2024 - January 15, 2025</p>
+                        <p><strong>Status:</strong> Completed</p>
+                        <div style="margin-top: 1rem;">
+                            <a href="https://github.com/DanielRajChristeen/StudentHub" target="_blank" class="btn btn-primary" style="font-size: 0.9rem; padding: 8px 20px;">Read More</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="py_calculator.png" alt="Project Name" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Py-Calculator</h3>
+                        <p class="project-description">A Python-based calculator app featuring a user-friendly GUI, advanced mathematical functions, temporary memory storage to back up previous calculations, and efficient real-time performance, making it ideal for both learners and daily users, with a modular codebase for future enhancements.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">Memory Management</span>
+                            <span class="tech-tag">Mathematics</span>
+                            <span class="tech-tag">String Handling</span>
+                        </div>
+                        <p><strong>Date:</strong> July 15, 2024</p>
+                        <p><strong>Status:</strong> Completed</p>
+                        <div style="margin-top: 1rem;">
+                            <a href="https://github.com/DanielRajChristeen/Py-Calculator" target="_blank" class="btn btn-primary" style="font-size: 0.9rem; padding: 8px 20px;">Read More</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="irrigation_system.png" alt="Project Name" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Smart Irrigation System with Adjustable Thresholds</h3>
+                        <p class="project-description">Developed a microcontroller-based irrigation system using Arduino Uno to optimize water usage by monitoring soil moisture, temperature, and water levels. Implemented adjustable thresholds and a real-time LCD interface, automating irrigation to conserve water and enhance efficiency in agricultural settings.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Arduino Uno</span>
+                            <span class="tech-tag">Sensors</span>
+                            <span class="tech-tag">LCD Interface</span>
+                            <span class="tech-tag">Automation</span>
+                            <span class="tech-tag">IoT</span>
+                        </div>
+                        <p><strong>Date:</strong> June 10, 2024</p>
+                        <p><strong>Status:</strong> Completed</p>
+                        <div style="margin-top: 1rem;">
+                            <a href="https://github.com/DanielRajChristeen/Smart-Irrigation-System-with-Adjustable-Thresholds" target="_blank" class="btn btn-primary" style="font-size: 0.9rem; padding: 8px 20px;">Read More</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="UNO-calculator.png" alt="Project Name" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">UNO Calculator</h3>
+                        <p class="project-description">An Arduino-based calculator project utilizing a keypad and a 16x2 LCD display to perform basic arithmetic operations with reliable input-output handling, including a detailed Proteus simulation file for accurate virtual testing, debugging, and validation of circuit behavior before real-world hardware implementation making it a beginner-friendly yet insightful embedded systems project.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Arduino</span>
+                            <span class="tech-tag">KeyBoard</span>
+                            <span class="tech-tag">String Handling</span>
+                            <span class="tech-tag">16x2 LCD Display</span>
+                            <span class="tech-tag">Proteus Simulation</span>
+                        </div>
+                        <p><strong>Date:</strong> May 21, 2024</p>
+                        <p><strong>Status:</strong> Completed</p>
+                        <div style="margin-top: 1rem;">
+                            <a href="https://github.com/DanielRajChristeen/UNO-Calculator" target="_blank" class="btn btn-primary" style="font-size: 0.9rem; padding: 8px 20px;">Read More</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="AccelGaurd.jpg" alt="Project Name" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">AccelGuard</h3>
+                        <p class="project-description">AccelGuard is a MATLAB framework for real-time anomaly detection using accelerometer data. It analyzes three-axis readings to detect irregularities like free falls or machinery faults, with applications in wearable devices, industrial monitoring, robotics, and IoT systems, ensuring safety and operational efficiency.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Accelerometer</span>
+                            <span class="tech-tag">IoT</span>
+                            <span class="tech-tag">MATLAB</span>
+                            <span class="tech-tag">Machine Learning</span>
+                            <span class="tech-tag">Anomaly Detection</span>
+                        </div>
+                        <p><strong>Date:</strong> Decemeber 15, 2023</p>
+                        <p><strong>Status:</strong> Completed</p>
+                        <div style="margin-top: 1rem;">
+                            <a href="https://github.com/DanielRajChristeen/AccelGuard" target="_blank" class="btn btn-primary" style="font-size: 0.9rem; padding: 8px 20px;">Read More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="certifications" class="section certifications">
+        <div class="container">
+            <h2 class="section-title">Certifications & Achievements</h2>
+            <div class="cert-grid">
+                <div class="cert-item">
+                    <div class="cert-title">GATE 2024 Qualified</div>
+                    <div class="cert-org">Electronics and Communication Engineering</div>
+                    <div class="cert-date">Rank: 7328 | Score: 393</div>
+                </div>
+                <div class="cert-item">
+                    <div class="cert-title">Embedded System Programming</div>
+                    <div class="cert-org">Pantech e-learning</div>
+                    <div class="cert-date">June 2023</div>
+                </div>
+                <div class="cert-item">
+                    <div class="cert-title">Raspberry Pi Programming</div>
+                    <div class="cert-org">Pantech e-learning</div>
+                    <div class="cert-date">March 2024</div>
+                </div>
+                <div class="cert-item">
+                    <div class="cert-title">Industrial Training</div>
+                    <div class="cert-org">Alstom Transport India Limited</div>
+                    <div class="cert-date">May 2024</div>
+                </div>
+                <div class="cert-item">
+                    <div class="cert-title">IoT Systems Development</div>
+                    <div class="cert-org">NEEVEE Technologies</div>
+                    <div class="cert-date">Ongoing</div>
+                </div>
+                <div class="cert-item">
+                    <div class="cert-title">Academic Excellence</div>
+                    <div class="cert-org">CGPA: 8.15/10</div>
+                    <div class="cert-date">2021-2025</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="section contact">
+        <div class="container">
+            <h2 class="section-title">Let's Connect</h2>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h3>Get in Touch</h3>
+                    <div class="contact-item">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                        </svg>
+                        <a href="mailto:danielrajpchristeen@gmail.com">danielrajpchristeen@gmail.com</a>
+                    </div>
+                    <div class="contact-item">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+                        </svg>
+                        <a href="tel:+917305864132">+91 73058 64132</a>
+                    </div>
+                    <div class="contact-item">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                        </svg>
+                        <span>Chennai, Tamil Nadu, India</span>
+                    </div>
+                    <div class="contact-item">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/>
+                        </svg>
+                        <a href="https://www.linkedin.com/in/daniel-raj-christeen-4a382523b/" target="_blank">https://www.linkedin.com/in/daniel-raj-christeen-4a382523b/</a>
+                    </div>
+                    <div class="contact-item">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                        </svg>
+                        <a href="https://github.com/DanielRajChristeen" target="_blank">https://github.com/DanielRajChristeen</a>
+                    </div>
+                </div>
+                <div class="contact-info">
+                    <h3>Current Status</h3>
+                    <p style="color: var(--light-white); margin-bottom: 1.5rem;">I'm currently open to new opportunities and exciting projects. Whether you're looking for an IoT specialist, embedded systems developer, or someone passionate about electronics and communication engineering, I'd love to hear from you!</p>
+                    <div style="background: var(--primary-red); padding: 1rem; border-radius: 8px; text-align: center; margin-top: 1.5rem;">
+                        <strong style="color: var(--white);">Available for Full-time Opportunities</strong>
+                    </div>
+                    <div style="margin-top: 1rem; text-align: center;">
+                        <a href="mailto:danielrajpchristeen@gmail.com" class="btn btn-primary" style="display: inline-block; margin-top: 1rem;">Send Message</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Daniel Raj C. All rights reserved. | Electronics & Communication Engineer | IoT Specialist</p>
+            <p style="margin-top: 0.5rem; color: var(--light-red);">Passionate about creating innovative solutions through technology</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add fade-in animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in-up');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all sections
+        document.querySelectorAll('.section').forEach(section => {
+            observer.observe(section);
+        });
+
+        // Header background on scroll
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(0, 0, 0, 0.95)';
+            } else {
+                header.style.background = 'rgba(0, 0, 0, 0.9)';
+            }
+        });
+
+        // Animate skill bars when they come into view
+        const skillBars = document.querySelectorAll('.skill-progress');
+        const skillObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const bar = entry.target;
+                    const width = bar.style.width;
+                    bar.style.width = '0%';
+                    setTimeout(() => {
+                        bar.style.width = width;
+                    }, 200);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        skillBars.forEach(bar => {
+            skillObserver.observe(bar);
+        });
+
+        // Mobile menu toggle (if needed)
+        const createMobileMenu = () => {
+            if (window.innerWidth <= 768) {
+                const nav = document.querySelector('.nav-links');
+                const logo = document.querySelector('.logo');
+                
+                if (!document.querySelector('.mobile-menu-btn')) {
+                    const menuBtn = document.createElement('button');
+                    menuBtn.className = 'mobile-menu-btn';
+                    menuBtn.innerHTML = '☰';
+                    menuBtn.style.cssText = `
+                        background: none;
+                        border: none;
+                        color: var(--white);
+                        font-size: 1.5rem;
+                        cursor: pointer;
+                        display: block;
+                    `;
+                    
+                    menuBtn.addEventListener('click', () => {
+                        nav.style.display = nav.style.display === 'flex' ? 'none' : 'flex';
+                        nav.style.flexDirection = 'column';
+                        nav.style.position = 'absolute';
+                        nav.style.top = '100%';
+                        nav.style.left = '0';
+                        nav.style.width = '100%';
+                        nav.style.background = 'var(--black)';
+                        nav.style.padding = '1rem';
+                    });
+                    
+                    logo.parentNode.appendChild(menuBtn);
+                }
+            }
+        };
+
+        // Initialize mobile menu on load and resize
+        createMobileMenu();
+        window.addEventListener('resize', createMobileMenu);
+
+        // Add typing effect to hero subtitle
+        const subtitle = document.querySelector('.hero .subtitle');
+        const text = subtitle.textContent;
+        subtitle.textContent = '';
+        
+        let i = 0;
+        const typeWriter = () => {
+            if (i < text.length) {
+                subtitle.textContent += text.charAt(i);
+                i++;
+                setTimeout(typeWriter, 50);
+            }
+        };
+        
+        setTimeout(typeWriter, 1000);
+    </script>
+</body>
+</html>
