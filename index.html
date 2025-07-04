@@ -1090,6 +1090,7 @@
                     </div>
                     <div style="margin-top: 1rem; text-align: center;">
                         <a href="mailto:danielrajpchristeen@gmail.com" class="btn btn-primary" style="display: inline-block; margin-top: 1rem;">Send Message</a>
+                        <button onclick="copyToClipboard()" class="btn btn-secondary" style="display: inline-block; margin-top: 0.5rem; margin-left: 0.5rem;">Copy Email</button>
                     </div>
                 </div>
             </div>
@@ -1220,6 +1221,111 @@
         };
         
         setTimeout(typeWriter, 1000);
+
+        // Copy to clipboard functionality
+        function copyToClipboard() {
+            const email = 'danielrajpchristeen@gmail.com';
+            
+            // Try using the modern Clipboard API first
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(email).then(() => {
+                    showCopyMessage('Email copied to clipboard!');
+                }).catch(err => {
+                    // Fallback for older browsers
+                    fallbackCopyToClipboard(email);
+                });
+            } else {
+                // Fallback for older browsers
+                fallbackCopyToClipboard(email);
+            }
+        }
+
+        // Fallback copy method for older browsers
+        function fallbackCopyToClipboard(text) {
+            const textArea = document.createElement('textarea');
+            textArea.value = text;
+            textArea.style.position = 'fixed';
+            textArea.style.left = '-999999px';
+            textArea.style.top = '-999999px';
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+            
+            try {
+                document.execCommand('copy');
+                showCopyMessage('Email copied to clipboard!');
+            } catch (err) {
+                showCopyMessage('Failed to copy email. Please copy manually.');
+            }
+            
+            document.body.removeChild(textArea);
+        }
+
+        // Show copy confirmation message
+        function showCopyMessage(message) {
+            // Remove existing message if any
+            const existingMessage = document.querySelector('.copy-message');
+            if (existingMessage) {
+                existingMessage.remove();
+            }
+
+            // Create and show new message
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'copy-message';
+            messageDiv.textContent = message;
+            messageDiv.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: var(--primary-red);
+                color: var(--white);
+                padding: 12px 20px;
+                border-radius: 5px;
+                font-weight: bold;
+                z-index: 10000;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+                animation: slideIn 0.3s ease;
+            `;
+
+            document.body.appendChild(messageDiv);
+
+            // Remove message after 3 seconds
+            setTimeout(() => {
+                messageDiv.style.animation = 'slideOut 0.3s ease';
+                setTimeout(() => {
+                    if (messageDiv.parentNode) {
+                        messageDiv.remove();
+                    }
+                }, 300);
+            }, 3000);
+        }
+
+        // Add CSS animations for the copy message
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideIn {
+                from {
+                    transform: translateX(100%);
+                    opacity: 0;
+                }
+                to {
+                    transform: translateX(0);
+                    opacity: 1;
+                }
+            }
+            
+            @keyframes slideOut {
+                from {
+                    transform: translateX(0);
+                    opacity: 1;
+                }
+                to {
+                    transform: translateX(100%);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
     </script>
 </body>
 </html>
