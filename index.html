@@ -1430,8 +1430,7 @@ function generateResume() {
             });
         });
 
-        // Extract Skills (excluding Soft Skills)
-        // Select both possible class patterns (covers all skill sections)
+		// Fetch both plural and singular skill section wrappers
 const skillCategories = document.querySelectorAll('.skills-category, .skill-category');
 
 const skills = {};
@@ -1440,14 +1439,15 @@ const uniqueSkills = new Set();
 skillCategories.forEach(category => {
     const categoryName = category.querySelector('h3')?.textContent.trim() || "";
 
-    // Skip Soft Skills category (handled separately)
+    // Skip "Soft Skills" section
     if (categoryName.toLowerCase().includes('soft skill')) return;
 
+    // Collect all visible skill text (ignore progress %)
     const skillItems = Array.from(category.querySelectorAll('.skill-item span'))
         .map(s => s.textContent.trim())
-        .filter(text => text && !text.includes('%')); // skip empty/progress spans
+        .filter(text => text && !text.includes('%'));
 
-    // Deduplicate across all categories
+    // Remove duplicates globally across categories
     const distinctSkills = skillItems.filter(skill => {
         const key = skill.toLowerCase();
         if (uniqueSkills.has(key)) return false;
@@ -1455,8 +1455,9 @@ skillCategories.forEach(category => {
         return true;
     });
 
+    // Sort alphabetically for consistency
     if (distinctSkills.length > 0) {
-        skills[categoryName] = distinctSkills.join(', ');
+        skills[categoryName] = distinctSkills.sort((a, b) => a.localeCompare(b)).join(', ');
     }
 });
 
@@ -1921,6 +1922,7 @@ skillCategories.forEach(category => {
     </script>
 </body>
 </html>
+
 
 
 
