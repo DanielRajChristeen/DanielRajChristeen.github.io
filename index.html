@@ -1420,13 +1420,13 @@ function generateResume() {
             const period = durationText.replace('Duration:', '').replace('Date:', '').trim();
             
             // Extract tech tags
-            const techTags = Array.from(card.querySelectorAll('.tech-tag')).map(tag => tag.textContent.trim());
+            const projectLink = card.querySelector('a[href*="github.com"]')?.href || "";
             
             projects.push({
                 title,
                 period,
                 description,
-                technologies: techTags.join(', ')
+                url: projectLink
             });
         });
 
@@ -1439,7 +1439,8 @@ function generateResume() {
             if (categoryName.toLowerCase().includes('soft skill')) {
                 return;
             }
-            const skillItems = Array.from(category.querySelectorAll('.skill-item span:first-child')).map(s => s.textContent.trim());
+            const skillItems = Array.from(category.querySelectorAll('.skill-item span')).map(s => s.textContent.trim()).filter(text => text && !text.includes('%')); // skips empty or progress bar elements
+
             skills[categoryName] = skillItems.join(', ');
         });
 
@@ -1629,7 +1630,7 @@ function generateResume() {
         <div class="period">${project.period}</div>
         <div class="job-title">${project.title}</div>
         <div class="description">${project.description}</div>
-        ${project.technologies ? `<div style="margin-top: 3px;"><strong>Technologies:</strong> ${project.technologies}</div>` : ''}
+        ${p.url ? `<div><strong>Project URL:</strong> <a href="${p.url}" target="_blank">${p.url}</a></div>` : ""}
     </div>`).join('')}
 
     <div class="section-title">Technical Skills</div>
@@ -1904,5 +1905,6 @@ function generateResume() {
     </script>
 </body>
 </html>
+
 
 
