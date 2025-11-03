@@ -1431,18 +1431,34 @@ function generateResume() {
         });
 
         // Extract Skills (excluding Soft Skills)
-        const skillCategories = document.querySelectorAll('.skill-category');
-        const skills = {};
-        skillCategories.forEach(category => {
-            const categoryName = category.querySelector('h3')?.textContent.trim() || "";
-            // Skip Soft Skills category as it's displayed separately
-            if (categoryName.toLowerCase().includes('soft skill')) {
-                return;
-            }
-            const skillItems = Array.from(category.querySelectorAll('.skill-item span')).map(s => s.textContent.trim()).filter(text => text && !text.includes('%')); // skips empty or progress bar elements
+        // Select both possible class patterns (covers all skill sections)
+const skillCategories = document.querySelectorAll('.skills-category, .skill-category');
 
-            skills[categoryName] = skillItems.join(', ');
-        });
+const skills = {};
+const uniqueSkills = new Set();
+
+skillCategories.forEach(category => {
+    const categoryName = category.querySelector('h3')?.textContent.trim() || "";
+
+    // Skip Soft Skills category (handled separately)
+    if (categoryName.toLowerCase().includes('soft skill')) return;
+
+    const skillItems = Array.from(category.querySelectorAll('.skill-item span'))
+        .map(s => s.textContent.trim())
+        .filter(text => text && !text.includes('%')); // skip empty/progress spans
+
+    // Deduplicate across all categories
+    const distinctSkills = skillItems.filter(skill => {
+        const key = skill.toLowerCase();
+        if (uniqueSkills.has(key)) return false;
+        uniqueSkills.add(key);
+        return true;
+    });
+
+    if (distinctSkills.length > 0) {
+        skills[categoryName] = distinctSkills.join(', ');
+    }
+});
 
         // Extract ALL Certifications
         const certItems = document.querySelectorAll('.cert-item');
@@ -1905,6 +1921,7 @@ function generateResume() {
     </script>
 </body>
 </html>
+
 
 
 
